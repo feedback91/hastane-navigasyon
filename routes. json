@@ -1,33 +1,91 @@
 {
-  "ekg_odasi": {
-    "target_name": "Korucuk Kampüsü - 4. Kat EKG Odası",
+  "asansor": {
+    "target_name": "3. Kat - Asansör ve Merdivenler",
     "steps": [
       {
-        "step_number": 1,
-        "icon": "⬆️",
-        "title": "KORİDORDA DÜZ İLERLEYİN",
-        "description": "Bulunduğunuz noktadan orta koridora doğru yaklaşık 20 metre düz yürüyün.",
-        "distance_m": 20
-      },
-      {
-        "step_number": 2,
-        "icon": "🛗",
-        "title": "ASANSÖRE BİNİN",
-        "description": "Karşınızdaki orta asansör bloğunu kullanarak 4. KATA çıkın.",
+        "icon": "📍",
+        "title": "MEVCUT KONUM",
+        "description": "Şu an 3. Kat ana asansör bloğu önündesiniz.",
         "distance_m": 0
       },
       {
-        "step_number": 3,
-        "icon": "↩️",
-        "title": "4. KATTA SOLA DÖNÜN",
-        "description": "Asansörden inince sol koridora dönün ve poliklinik çizgisi boyunca ilerleyin.",
+        "icon": "🛗",
+        "title": "ASANSÖRLER TAM KARŞINIZDA",
+        "description": "Asansörler ve yangın merdiveni bulunduğunuz noktanın hemen arkasındadır.",
+        "distance_m": 0
+      }
+    ]
+  },
+  "wc": {
+    "target_name": "3. Kat - Tuvaletler (WC)",
+    "steps": [
+      {
+        "icon": "⬆️",
+        "title": "KORİDORDA İLERLEYİN",
+        "description": "Asansör önünden sol koridora doğru düz yürüyün.",
+        "distance_m": 10
+      },
+      {
+        "icon": "🚻",
+        "title": "WC'YE ULAŞTINIZ",
+        "description": "Tuvaletler koridorun sol tarafında yer almaktadır.",
+        "distance_m": 5
+      }
+    ]
+  },
+  "yogun_bakim": {
+    "target_name": "3. Kat - Yoğun Bakım Alanı",
+    "steps": [
+      {
+        "icon": "⬆️",
+        "title": "SAĞ KORİDORA YÖNELİN",
+        "description": "Bulunduğunuz noktadan sağ taraftaki ana koridora doğru düz yürüyün.",
         "distance_m": 15
       },
       {
-        "step_number": 4,
-        "icon": "📍",
-        "title": "HEDEFE ULAŞTINIZ",
-        "description": "EKG Odası koridorun sağ tarafında yer almaktadır.",
+        "icon": "➡️",
+        "title": "SAĞA DÖNÜN",
+        "description": "Koridor sonundan sağa dönerek yoğun bakım girişine ilerleyin.",
+        "distance_m": 20
+      },
+      {
+        "icon": "🏥",
+        "title": "YOĞUN BAKIMA ULAŞTINIZ",
+        "description": "Yoğun Bakım Hemşire İstasyonu ve bekleme alanı karşınızdadır.",
+        "distance_m": 0
+      }
+    ]
+  },
+  "ameliyathane": {
+    "target_name": "3. Kat - Ameliyathane / Uyanma Alanı",
+    "steps": [
+      {
+        "icon": "⬆️",
+        "title": "DOĞU KORİDORUNA İLERLEYİN",
+        "description": "Orta noktadan sağdaki ameliyathane koridoruna doğru düz yürüyün.",
+        "distance_m": 30
+      },
+      {
+        "icon": "🚪",
+        "title": "AMELİYATHANE BÖLGESİ",
+        "description": "Uyanma alanı, ameliyat hazırlama ve salonlar bu koridor boyunca sıralanmıştır.",
+        "distance_m": 0
+      }
+    ]
+  },
+  "rontgen": {
+    "target_name": "3. Kat - Röntgen Birimi",
+    "steps": [
+      {
+        "icon": "⬇️",
+        "title": "GÜNEY KORİDORUNA İLERLEYİN",
+        "description": "Orta hattan alt koridora doğru düz yürüyün.",
+        "distance_m": 25
+      },
+      {
+        "icon": "🩻",
+        "title": "RÖNTGENE ULAŞTINIZ",
+        "description": "Röntgen birimi alt koridorun sol tarafındadır.",
         "distance_m": 0
       }
     ]
