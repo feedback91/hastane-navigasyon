@@ -27,11 +27,94 @@
     <hr class="divider">
     <div id="icon" class="icon-box">🔄</div>
     <div id="title" class="step-title">Lütfen Bekleyin</div>
-    <div id="desc" class="step-desc">Navigasyon rotası alınıyor...</div>
+    <div id="desc" class="step-desc">Navigasyon rotası yükleniyor...</div>
     <div id="meter" class="meter-badge">-- Metre</div>
     <button id="next-btn" class="btn" onclick="nextStep()">Sonraki Adım ➔</button>
   </div>
 
-  <script src="app.js"></script>
+  <script>
+    // Tüm rotalar doğrudan kodun içine gömüldü (Hata ihtimali sıfır)
+    const routesData = {
+      "ekg_odasi": {
+        "target_name": "Korucuk Kampüsü - 4. Kat EKG Odası",
+        "steps": [
+          { "icon": "⬆️", "title": "KORİDORDA DÜZ İLERLEYİN", "description": "Bulunduğunuz noktadan orta koridora doğru yaklaşık 20 metre düz yürüyün.", "distance_m": 20 },
+          { "icon": "🛗", "title": "ASANSÖRE BİNİN", "description": "Karşınızdaki orta asansör bloğunu kullanarak 4. KATA çıkın.", "distance_m": 0 },
+          { "icon": "↩️", "title": "4. KATTA SOLA DÖNÜN", "description": "Asansörden inince sol koridora dönün ve poliklinik çizgisi boyunca ilerleyin.", "distance_m": 15 },
+          { "icon": "📍", "title": "HEDEFE ULAŞTINIZ", "description": "EKG Odası koridorun sağ tarafında yer almaktadır.", "distance_m": 0 }
+        ]
+      },
+      "wc": {
+        "target_name": "1. Kat - Tuvaletler (WC)",
+        "steps": [
+          { "icon": "⬆️", "title": "DÜZ İLERLEYİN", "description": "Bulunduğunuz koridordan orta ana koridora doğru düz yürüyün.", "distance_m": 15 },
+          { "icon": "↪️", "title": "SAĞA DÖNÜN", "description": "Orta koridora çıkınca sağ taraftaki WC yönlendirme panolarını takip edin.", "distance_m": 10 },
+          { "icon": "🚻", "title": "WC'YE ULAŞTINIZ", "description": "Bay / Bayan tuvaletleri koridorun hemen solundadır.", "distance_m": 0 }
+        ]
+      },
+      "asansor": {
+        "target_name": "1. Kat - Orta Asansör Bloğu",
+        "steps": [
+          { "icon": "⬆️", "title": "KORİDOR BOYUNCA DÜZ YÜRÜYÜN", "description": "Bulunduğunuz noktadan orta göbeğe doğru yaklaşık 20 metre düz ilerleyin.", "distance_m": 20 },
+          { "icon": "🛗", "title": "ASANSÖRLERE ULAŞTINIZ", "description": "3'lü asansör grubu tam karşınızda yer almaktadır.", "distance_m": 0 }
+        ]
+      }
+    };
+
+    let currentStepIndex = 0;
+    let routeSteps = [];
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const targetKey = urlParams.get('hedef') || 'ekg_odasi';
+
+    const selectedRoute = routesData[targetKey];
+
+    if (selectedRoute) {
+      document.getElementById('target-name').innerText = selectedRoute.target_name;
+      routeSteps = selectedRoute.steps;
+      renderStep();
+    } else {
+      document.getElementById('target-name').innerText = "Hata";
+      document.getElementById('icon').innerText = "⚠️";
+      document.getElementById('title').innerText = "Hedef Bulunamadı";
+      document.getElementById('desc').innerText = "Belirtilen hedef sistemde mevcut değil.";
+      document.getElementById('meter').style.display = "none";
+    }
+
+    function renderStep() {
+      const step = routeSteps[currentStepIndex];
+      document.getElementById('icon').innerText = step.icon;
+      document.getElementById('title').innerText = step.title;
+      document.getElementById('desc').innerText = step.description;
+      
+      const meterElem = document.getElementById('meter');
+      if (step.distance_m > 0) {
+        meterElem.style.display = "inline-block";
+        meterElem.innerText = `Mesafe: ~${step.distance_m} Metre`;
+      } else {
+        meterElem.style.display = "none";
+      }
+
+      const btn = document.getElementById('next-btn');
+      if (currentStepIndex === routeSteps.length - 1) {
+        btn.innerText = "Navigasyonu Tamamla";
+        btn.style.background = "#38a169";
+      } else {
+        btn.innerText = "Sonraki Adım ➔";
+        btn.style.background = "#3182ce";
+      }
+    }
+
+    function nextStep() {
+      if (currentStepIndex < routeSteps.length - 1) {
+        currentStepIndex++;
+        renderStep();
+      } else {
+        alert("Hedefe ulaştınız!");
+        currentStepIndex = 0;
+        renderStep();
+      }
+    }
+  </script>
 </body>
 </html>
