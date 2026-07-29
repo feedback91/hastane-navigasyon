@@ -8,52 +8,73 @@
     * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
     body { background: #f0f2f5; margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
     .card { background: #ffffff; border-radius: 20px; padding: 25px; width: 100%; max-width: 400px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); text-align: center; }
-    .hospital-title { font-size: 13px; color: #718096; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
     
-    /* Arama Kutusu & Kısayollar */
-    .search-box { width: 100%; padding: 12px 15px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 15px; margin-bottom: 12px; outline: none; transition: border-color 0.2s; }
+    .hospital-title { font-size: 13px; color: #718096; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; }
+    .location-badge { display: inline-block; background: #e2e8f0; color: #2d3748; font-weight: 700; font-size: 14px; padding: 6px 16px; border-radius: 20px; margin-bottom: 15px; }
+
+    /* Arama Kutusu */
+    .search-box { width: 100%; padding: 12px 15px; border: 2px solid #cbd5e0; border-radius: 12px; font-size: 14px; margin-bottom: 15px; outline: none; transition: border-color 0.2s; }
     .search-box:focus { border-color: #3182ce; }
-    .quick-buttons { display: flex; gap: 8px; justify-content: center; margin-bottom: 20px; }
-    .quick-btn { background: #edf2f7; color: #2d3748; border: none; padding: 8px 14px; font-size: 13px; font-weight: 600; border-radius: 20px; cursor: pointer; }
-    .quick-btn:active { background: #cbd5e0; }
+
+    /* Ana Menü Buton Izgarası */
+    .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+    .menu-btn { background: #edf2f7; color: #2d3748; border: 1px solid #e2e8f0; padding: 14px 10px; font-size: 14px; font-weight: 700; border-radius: 12px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px; transition: all 0.2s; }
+    .menu-btn:active { background: #cbd5e0; transform: scale(0.98); }
+    .menu-btn .icon { font-size: 24px; }
 
     .divider { height: 1px; background: #e2e8f0; border: none; margin: 15px 0; }
     
-    .target-title { font-size: 18px; color: #1a202c; font-weight: 700; margin-bottom: 10px; }
+    /* Navigasyon Adım Ekranı */
+    .target-title { font-size: 18px; color: #1a202c; font-weight: 700; margin-bottom: 5px; }
     .icon-box { font-size: 80px; margin: 10px 0; min-height: 90px; display: flex; align-items: center; justify-content: center; }
     .step-title { font-size: 20px; font-weight: 800; color: #2b6cb0; margin-bottom: 8px; }
     .step-desc { font-size: 14px; color: #4a5568; line-height: 1.5; min-height: 45px; }
     .meter-badge { display: inline-block; background: #feebc8; color: #c05621; font-weight: 700; font-size: 13px; padding: 5px 12px; border-radius: 20px; margin-top: 10px; }
     
-    .btn { background: #3182ce; color: white; border: none; padding: 15px; font-size: 16px; font-weight: 700; border-radius: 12px; cursor: pointer; margin-top: 20px; width: 100%; }
-    .btn:active { background: #2b6cb0; }
+    .btn { background: #3182ce; color: white; border: none; padding: 15px; font-size: 16px; font-weight: 700; border-radius: 12px; cursor: pointer; margin-top: 15px; width: 100%; }
+    .btn-back { background: #718096; margin-top: 8px; }
+    .btn:active { opacity: 0.9; }
   </style>
 </head>
 <body>
 
   <div class="card">
     <div class="hospital-title">SEAH KORUCUK KAMPÜSÜ</div>
-    
-    <!-- Kullanıcının Oda Arayacağı Kutucuk -->
-    <input type="text" id="search-input" class="search-box" placeholder="Oda / Poliklinik adı yazın (Örn: Göz)" oninput="filterSearch()">
-    <datalist id="route-list"></datalist>
+    <!-- Mevcut Kat Bilgisi -->
+    <div id="kat-info" class="location-badge">📍 Şu an 3. Kat Polikliniklerindesiniz</div>
 
-    <!-- Hızlı Kısayol Butonları -->
-    <div class="quick-buttons">
-      <button class="quick-btn" onclick="startRoute('wc')">🚻 WC</button>
-      <button class="quick-btn" onclick="startRoute('asansor')">🛗 Asansör</button>
-      <button class="quick-btn" onclick="startRoute('goz_olcum')">👁️ Göz Ölçüm</button>
+    <!-- ANA MENÜ (AÇILIŞ EKRANI) -->
+    <div id="main-menu">
+      <input type="text" id="search-input" class="search-box" placeholder="Oda veya Poliklinik Arayın..." oninput="filterSearch()">
+
+      <div class="menu-grid">
+        <button class="menu-btn" onclick="startRoute('wc')">
+          <span class="icon">🚻</span> Tuvalet (WC)
+        </button>
+        <button class="menu-btn" onclick="startRoute('asansor')">
+          <span class="icon">🛗</span> Asansörler
+        </button>
+        <button class="menu-btn" onclick="startRoute('goz_olcum')">
+          <span class="icon">👁️</span> Göz Ölçüm Odası
+        </button>
+        <button class="menu-btn" onclick="startRoute('ekg_odasi')">
+          <span class="icon">🫀</span> EKG Odası
+        </button>
+      </div>
     </div>
 
-    <hr class="divider">
-
-    <div id="target-name" class="target-title">Hedef Seçin</div>
-    <div id="icon" class="icon-box">🗺️</div>
-    <div id="title" class="step-title">Nereye Gitmek İstiyorsunuz?</div>
-    <div id="desc" class="step-desc">Yukarıdan oda arayabilir veya hızlı butonları kullanabilirsiniz.</div>
-    <div id="meter" class="meter-badge" style="display:none;">-- Metre</div>
-    
-    <button id="next-btn" class="btn" style="display:none;" onclick="nextStep()">Sonraki Adım ➔</button>
+    <!-- NAVİGASYON EKRANI (Başta Gizli) -->
+    <div id="nav-screen" style="display: none;">
+      <hr class="divider">
+      <div id="target-name" class="target-title">--</div>
+      <div id="icon" class="icon-box">🔄</div>
+      <div id="title" class="step-title">Lütfen Bekleyin</div>
+      <div id="desc" class="step-desc">Navigasyon rotası yükleniyor...</div>
+      <div id="meter" class="meter-badge" style="display:none;">-- Metre</div>
+      
+      <button id="next-btn" class="btn" onclick="nextStep()">Sonraki Adım ➔</button>
+      <button class="btn btn-back" onclick="showMenu()">Ana Menüye Dön</button>
+    </div>
   </div>
 
   <script>
@@ -67,29 +88,34 @@
       .then(data => {
         allRoutes = data;
         
-        // Arama kutusu için öneri listesini doldur
-        const datalist = document.getElementById('route-list');
-        
-        // URL'den parametre gelmişse (QR kod ile girildiyse)
+        // URL'den parametre gelmişse (Gelişmiş QR kod ile girildiyse)
         const urlParams = new URLSearchParams(window.location.search);
         const targetKey = urlParams.get('hedef');
+        const kat = urlParams.get('kat');
+
+        if (kat) {
+          document.getElementById('kat-info').innerText = `📍 Şu an ${kat}. Kattasınız`;
+        }
+
         if (targetKey && allRoutes[targetKey]) {
           startRoute(targetKey);
         }
       });
 
-    // Kullanıcı Arama Kutusu İçi Arama
+    // Arama Kutusu İçi Arama
     function filterSearch() {
       const query = document.getElementById('search-input').value.toLowerCase().trim();
+      if (query.length < 2) return;
+
       for (let key in allRoutes) {
-        if (allRoutes[key].target_name.toLowerCase().includes(query) && query.length > 2) {
+        if (allRoutes[key].target_name.toLowerCase().includes(query)) {
           startRoute(key);
           break;
         }
       }
     }
 
-    // Rotayı Başlat
+    // Rotayı Başlat ve Navigasyon Ekranına Geç
     function startRoute(key) {
       if (!allRoutes[key]) return;
       
@@ -98,8 +124,16 @@
       routeSteps = route.steps;
       currentStepIndex = 0;
       
-      document.getElementById('next-btn').style.display = "block";
+      document.getElementById('main-menu').style.display = "none";
+      document.getElementById('nav-screen').style.display = "block";
       renderStep();
+    }
+
+    // Ana Menüye Geri Dön
+    function showMenu() {
+      document.getElementById('main-menu').style.display = "block";
+      document.getElementById('nav-screen').style.display = "none";
+      document.getElementById('search-input').value = "";
     }
 
     // Adımları Ekrana Bas
@@ -133,6 +167,7 @@
         renderStep();
       } else {
         alert("Hedefe ulaştınız!");
+        showMenu();
       }
     }
   </script>
