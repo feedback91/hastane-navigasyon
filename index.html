@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEAH Korucuk Navigasyon</title>
+  <style>
+    * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    body { background: #f0f2f5; margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+    .card { background: #ffffff; border-radius: 20px; padding: 25px; width: 100%; max-width: 380px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); text-align: center; }
+    .hospital-title { font-size: 13px; color: #718096; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; }
+    .target-title { font-size: 20px; color: #1a202c; font-weight: 700; margin-bottom: 15px; }
+    .divider { height: 1px; background: #e2e8f0; border: none; margin-bottom: 20px; }
+    .icon-box { font-size: 90px; margin: 15px 0; min-height: 110px; display: flex; align-items: center; justify-content: center; }
+    .step-title { font-size: 22px; font-weight: 800; color: #2b6cb0; margin-bottom: 10px; }
+    .step-desc { font-size: 15px; color: #4a5568; line-height: 1.5; min-height: 50px; }
+    .meter-badge { display: inline-block; background: #feebc8; color: #c05621; font-weight: 700; font-size: 14px; padding: 6px 14px; border-radius: 20px; margin-top: 15px; }
+    .btn { background: #3182ce; color: white; border: none; padding: 16px; font-size: 17px; font-weight: 700; border-radius: 12px; cursor: pointer; margin-top: 25px; width: 100%; transition: background 0.2s; }
+    .btn:active { background: #2b6cb0; }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="hospital-title">SEAH Korucuk Kampüsü</div>
+    <div id="target-name" class="target-title">Yükleniyor...</div>
+    <hr class="divider">
+    <div id="icon" class="icon-box">🔄</div>
+    <div id="title" class="step-title">Lütfen Bekleyin</div>
+    <div id="desc" class="step-desc">Navigasyon rotası alınıyor...</div>
+    <div id="meter" class="meter-badge">-- Metre</div>
+    <button id="next-btn" class="btn" onclick="nextStep()">Sonraki Adım ➔</button>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
