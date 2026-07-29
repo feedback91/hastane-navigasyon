@@ -84,8 +84,8 @@
     let currentStepIndex = 0;
     let routeSteps = [];
 
-    // JSON Çek
-    fetch('routes.json')
+    // JSON Verisini Çek
+    fetch('routes.json?v=' + new Date().getTime()) // Önbellek engellemek için versiyon eklendi
       .then(res => res.json())
       .then(data => {
         allRoutes = data;
@@ -95,13 +95,17 @@
           startRoute(targetKey);
         }
       })
-      .catch(err => console.error("JSON yüklenemedi:", err));
+      .catch(err => console.error("JSON okuma hatası:", err));
+
+    function trToLower(text) {
+      return text.replace(/İ/g, 'i').replace(/I/g, 'ı').toLowerCase();
+    }
 
     function filterSearch() {
-      const query = document.getElementById('search-input').value.toLowerCase().trim();
+      const query = trToLower(document.getElementById('search-input').value.trim());
       if (query.length < 2) return;
       for (let key in allRoutes) {
-        if (allRoutes[key].target_name.toLowerCase().includes(query)) {
+        if (trToLower(allRoutes[key].target_name).includes(query)) {
           startRoute(key);
           break;
         }
@@ -110,7 +114,7 @@
 
     function startRoute(key) {
       if (!allRoutes[key]) {
-        alert("Bu hedef henüz JSON dosyasına eklenmedi!");
+        alert("Bu hedef henüz JSON dosyasına eklenmedi veya veri yükleniyor! Lütfen 10 saniye sonra tekrar deneyin.");
         return;
       }
       
