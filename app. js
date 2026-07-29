@@ -1,0 +1,58 @@
+let currentStepIndex = 0;
+let routeSteps = [];
+
+const urlParams = new URLSearchParams(window.location.search);
+const targetKey = urlParams.get('hedef') || 'ekg_odasi';
+
+fetch('routes.json')
+  .then(res => res.json())
+  .then(data => {
+    if (data[targetKey]) {
+      document.getElementById('target-name').innerText = data[targetKey].target_name;
+      routeSteps = data[targetKey].steps;
+      renderStep();
+    } else {
+      document.getElementById('title').innerText = "Hata";
+      document.getElementById('desc').innerText = "Belirtilen hedef sistemde bulunamadı.";
+      document.getElementById('icon').innerText = "⚠️";
+    }
+  })
+  .catch(err => {
+    document.getElementById('title').innerText = "Bağlantı Hatası";
+    document.getElementById('desc').innerText = "Veri dosyası (routes.json) okunamadı.";
+  });
+
+function renderStep() {
+  const step = routeSteps[currentStepIndex];
+  document.getElementById('icon').innerText = step.icon;
+  document.getElementById('title').innerText = step.title;
+  document.getElementById('desc').innerText = step.description;
+  
+  const meterElem = document.getElementById('meter');
+  if (step.distance_m > 0) {
+    meterElem.style.display = "inline-block";
+    meterElem.innerText = `Mesafe: ~${step.distance_m} Metre`;
+  } else {
+    meterElem.style.display = "none";
+  }
+
+  const btn = document.getElementById('next-btn');
+  if (currentStepIndex === routeSteps.length - 1) {
+    btn.innerText = "Navigasyonu Tamamla";
+    btn.style.background = "#38a169";
+  } else {
+    btn.innerText = "Sonraki Adım ➔";
+    btn.style.background = "#3182ce";
+  }
+}
+
+function nextStep() {
+  if (currentStepIndex < routeSteps.length - 1) {
+    currentStepIndex++;
+    renderStep();
+  } else {
+    alert("EKG Odası'na ulaştınız!");
+    currentStepIndex = 0;
+    renderStep();
+  }
+}
