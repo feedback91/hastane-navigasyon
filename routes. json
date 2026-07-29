@@ -1,0 +1,35 @@
+{
+  "ekg_odasi": {
+    "target_name": "Korucuk Kampüsü - 4. Kat EKG Odası",
+    "steps": [
+      {
+        "step_number": 1,
+        "icon": "⬆️",
+        "title": "KORİDORDA DÜZ İLERLEYİN",
+        "description": "Bulunduğunuz noktadan orta koridora doğru yaklaşık 20 metre düz yürüyün.",
+        "distance_m": 20
+      },
+      {
+        "step_number": 2,
+        "icon": "🛗",
+        "title": "ASANSÖRE BİNİN",
+        "description": "Karşınızdaki orta asansör bloğunu kullanarak 4. KATA çıkın.",
+        "distance_m": 0
+      },
+      {
+        "step_number": 3,
+        "icon": "↩️",
+        "title": "4. KATTA SOLA DÖNÜN",
+        "description": "Asansörden inince sol koridora dönün ve poliklinik çizgisi boyunca ilerleyin.",
+        "distance_m": 15
+      },
+      {
+        "step_number": 4,
+        "icon": "📍",
+        "title": "HEDEFE ULAŞTINIZ",
+        "description": "EKG Odası koridorun sağ tarafında yer almaktadır.",
+        "distance_m": 0
+      }
+    ]
+  }
+}
